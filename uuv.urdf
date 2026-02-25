@@ -1,0 +1,98 @@
+
+<?xml version="1.0"?>
+<robot name="uuv_fresh">
+
+  <material name="MatBlue"><color rgba="0.15 0.35 0.95 1.0"/></material>
+  <material name="MatGray"><color rgba="0.35 0.35 0.38 1.0"/></material>
+  <material name="MatOrange"><color rgba="1.0 0.45 0.05 1.0"/></material>
+  <material name="MatBlack"><color rgba="0.05 0.05 0.06 1.0"/></material>
+
+  <link name="base_footprint"/>
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="15.0"/>
+      <inertia ixx="0.35" ixy="0" ixz="0" iyy="0.50" iyz="0" izz="0.60"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.60 0.35 0.20"/>
+      </geometry>
+      <material name="MatBlue"/>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.60 0.35 0.20"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="base_footprint_to_base_link" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 1.5708"/>
+  </joint>
+
+  <link name="sensor_pod">
+    <visual>
+      <origin xyz="0.20 0 0.16" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.10"/>
+      </geometry>
+      <material name="MatOrange"/>
+    </visual>
+    <collision>
+      <origin xyz="0.20 0 0.16" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.10"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.20 0 0.16" rpy="0 0 0"/>
+      <mass value="0.3"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <joint name="sensor_pod_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="sensor_pod"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="thruster_left">
+    <visual>
+      <origin xyz="0.0 0.20 0.0" rpy="0 1.5708 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.12"/>
+      </geometry>
+      <material name="MatGray"/>
+    </visual>
+  </link>
+
+  <joint name="thruster_left_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="thruster_left"/>
+    <origin xyz="0.0 0.20 0.0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="thruster_right">
+    <visual>
+      <origin xyz="0.0 -0.20 0.0" rpy="0 1.5708 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.12"/>
+      </geometry>
+      <material name="MatGray"/>
+    </visual>
+  </link>
+
+  <joint name="thruster_right_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="thruster_right"/>
+    <origin xyz="0.0 -0.20 0.0" rpy="0 0 0"/>
+  </joint>
+
+</robot>
